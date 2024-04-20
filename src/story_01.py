@@ -4,6 +4,7 @@ import PyxelUniversalFont as puf
 
 from game_option import Option as Op
 
+
 class Story01():
     def __init__(self):
 
@@ -37,6 +38,7 @@ class Story01():
         # タイトル表示
         self.writer.draw(pyxel.width/3, 50, "ストーリー０１", 20, 1)
 
-if __name__=="__main__":
-    pyxel.init(Op.WINDOW_W, Op.WINDOW_H) # (W, H)
+
+if __name__ == "__main__":
+    pyxel.init(Op.WINDOW_W, Op.WINDOW_H)  # (W, H)
     Story01()

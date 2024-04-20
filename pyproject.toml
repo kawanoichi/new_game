@@ -10,6 +10,7 @@ python = "^3.10"
 pyxel = "^2.0.10"
 pillow = "^10.3.0"
 pyxel-universal-font = "^1.1.1"
+autopep8 = "^2.1.0"
 
 
 [build-system]
