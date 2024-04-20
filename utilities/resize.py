@@ -5,10 +5,11 @@ PROJECT_DIR_PATH = os.path.dirname(SCRIPT_DIR_PATH) # new_game
 DATA_PATH = os.path.join(PROJECT_DIR_PATH, "image")
 
 # """OPTION
-image_path = os.path.join(DATA_PATH, "画像名")
-save_path = os.path.join(DATA_PATH, "画像名")
-resize_w = 120
-resize_h = 160
+image_path = os.path.join(DATA_PATH, "title_background_400_300.png")
+save_path = os.path.join(DATA_PATH, "title_background_240_180.png")
+# save_path = os.path.join(DATA_PATH, "title_background_320_240.png")
+resize_w = 240
+resize_h = 180
 # """
 
 
