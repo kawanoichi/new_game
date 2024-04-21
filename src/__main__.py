@@ -4,7 +4,7 @@ from story_01 import Story01
 from game_option import Option as Op
 
 
-class Game:
+class Main:
     """ゲームクラス."""
 
     def __init__(self):
@@ -13,6 +13,7 @@ class Game:
         self.run()
 
     def run(self):
+        pyxel.cls(0)  # 画面クリア
         Title()
         pyxel.cls(0)  # 画面クリア
 
@@ -21,4 +22,4 @@ class Game:
 
 
 if __name__ == "__main__":
-    Game()
+    Main()

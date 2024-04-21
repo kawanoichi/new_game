@@ -1,19 +1,16 @@
 import pyxel
 import os
-import PyxelUniversalFont as puf
 
 from game_option import Option as Op
+from game import Game
 
 
-class Title:
+class Title(Game):
     def __init__(self):
-        # super().__init__() # 継承
+        super().__init__()
 
         # ゲーム素材の読み込み
         self.read_data()
-
-        # フォントを指定
-        self.writer = puf.Writer("misaki_gothic.ttf")
 
         # セレクトボタンフラグ
         self.button_flag = 1
@@ -33,9 +30,9 @@ class Title:
     def read_data(self):
         """必要データの読み来み."""
         # タイトル画面背景
-        path = os.path.join(Op.data_dir, Op.title_back_image)
+        path = os.path.join(Op.data_dir, Op.bkg_title)
         if os.path.exists(path):
-            pyxel.image(0).load(0, 0, path)
+            pyxel.image(Op.bkg_title_index).load(0, 0, path)
         else:
             print(f"No exists file {path}")
             exit()
@@ -54,7 +51,9 @@ class Title:
         pyxel.blt(描画位置x, 描画位置y, 画像ID,
                   描画元画像x, 描画元画像y, 描画幅, 描画高さ, 色)
         """
-        pyxel.blt(0, 0, 0, 0, 0, pyxel.width, pyxel.height)  # 背景
+        pyxel.cls(0)  # 画面クリア
+        pyxel.blt(0, 0, Op.bkg_title_index,
+                  0, 0, pyxel.width, pyxel.height)  # 背景
 
         # タイトルが中心に来るように計算
         x = Title.calu_text_x(Op.game_title, 30)
@@ -76,30 +75,10 @@ class Title:
         self.writer.draw(int(x), 130, select_1, Op.select_font_size, 1)
 
     @staticmethod
-    def calu_text_size(text: str):
-        """テキスト(文字数をカウント)
-        全角を1, アルファベットを0.5でカウントする
-        """
-        count = 0
-        for t in text:
-            # print(t)
-            # 全角の場合
-            if (0x3000 <= ord(t) <= 0x9FFF) \
-                    or (0xFF00 <= ord(t) <= 0xFFEF):
-                count += 1
-            # アルファベットの場合
-            elif (0x41 <= ord(t) <= 0x5A) \
-                    or (0x61 <= ord(t) <= 0x7A):
-                count += 0.5
-            else:
-                count += 0.5
-        return count
-
-    @staticmethod
     def calu_text_x(text, font_size):
         """テキストを画面中心に配置する際のx座標を求める関数."""
         adjustment = 4
-        text_size = Title.calu_text_size(text)
+        text_size = Game.calu_text_size(text)
         return (pyxel.width - (font_size * text_size)) / 2 + adjustment
 
 

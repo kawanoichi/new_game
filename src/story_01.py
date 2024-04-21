@@ -1,21 +1,22 @@
 import pyxel
 import os
-import PyxelUniversalFont as puf
 
 from game_option import Option as Op
+from game import Game
 
 
-class Story01():
+class Story01(Game):
     def __init__(self):
+        super().__init__()
 
         # ゲーム素材の読み込み
         self.read_data()
 
-        # フォントを指定
-        self.writer = puf.Writer("misaki_gothic.ttf")
-
         # ゲーム続行フラグ
         self.game_running = True
+
+        # テキストボックスフラグ
+        self.text_box_flag = False
 
         # ゲーム開始
         self.run()
@@ -28,15 +29,32 @@ class Story01():
 
     def read_data(self):
         """必要データの読み来み."""
-        pass
+        # 背景画像
+        path = os.path.join(Op.data_dir, Op.bkg_story01)
+        if os.path.exists(path):
+            pyxel.image(Op.bkg_story01_index).load(0, 0, path)
+        else:
+            print(f"No exists file {path}")
+            exit()
 
     def update(self):
         """ゲームの状態を更新する."""
-        pass
+        if pyxel.btnp(pyxel.KEY_SPACE):  # pyxel.KEY_ENTERは使えない
+            self.text_box_flag = not self.text_box_flag
+            print(self.text_box_flag)
 
     def draw(self):
-        # タイトル表示
-        self.writer.draw(pyxel.width/3, 50, "ストーリー０１", 20, 1)
+        """描画を行う関数.
+        画像の描画
+        pyxel.blt(描画位置x, 描画位置y, 画像ID,
+                  描画元画像x, 描画元画像y, 描画幅, 描画高さ, 色)
+        """
+        pyxel.blt(0, 0, Op.bkg_story01_index, 0, 0,
+                  pyxel.width, pyxel.height)  # 背景
+        self.writer.draw(pyxel.width/3, 50, "ストーリー０１", 20, 1)  # 文字
+
+        if self.text_box_flag:
+            Game.show_text_box()
 
 
 if __name__ == "__main__":
