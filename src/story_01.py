@@ -41,7 +41,6 @@ class Story01(Game):
         """ゲームの状態を更新する."""
         if pyxel.btnp(pyxel.KEY_SPACE):  # pyxel.KEY_ENTERは使えない
             self.text_box_flag = not self.text_box_flag
-            print(self.text_box_flag)
 
     def draw(self):
         """描画を行う関数.
@@ -54,7 +53,7 @@ class Story01(Game):
         self.writer.draw(pyxel.width/3, 50, "ストーリー０１", 20, 1)  # 文字
 
         if self.text_box_flag:
-            Game.show_text_box()
+            self.show_text_box()
 
 
 if __name__ == "__main__":

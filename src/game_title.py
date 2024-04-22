@@ -8,7 +8,6 @@ from game import Game
 class Title(Game):
     def __init__(self):
         super().__init__()
-
         # ゲーム素材の読み込み
         self.read_data()
 
@@ -56,7 +55,7 @@ class Title(Game):
                   0, 0, pyxel.width, pyxel.height)  # 背景
 
         # タイトルが中心に来るように計算
-        x = Title.calu_text_x(Op.game_title, 30)
+        x = self.calu_text_x(Op.game_title, 30)
         # タイトル表示
         self.writer.draw(int(x), 50, Op.game_title, Op.title_font_size, 1)
 
@@ -69,17 +68,10 @@ class Title(Game):
             select_1 = "→ " + Op.title_option_1
 
         # セレクトボタンの表示
-        x = Title.calu_text_x(select_0, 20)
+        x = self.calu_text_x(select_0, 20)
         self.writer.draw(int(x), 100, select_0, Op.select_font_size, 1)
-        x = Title.calu_text_x(select_1, 20)
+        x = self.calu_text_x(select_1, 20)
         self.writer.draw(int(x), 130, select_1, Op.select_font_size, 1)
-
-    @staticmethod
-    def calu_text_x(text, font_size):
-        """テキストを画面中心に配置する際のx座標を求める関数."""
-        adjustment = 4
-        text_size = Game.calu_text_size(text)
-        return (pyxel.width - (font_size * text_size)) / 2 + adjustment
 
 
 if __name__ == "__main__":
