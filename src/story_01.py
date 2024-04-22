@@ -1,5 +1,4 @@
 import pyxel
-import os
 
 from game_option import Option as Op
 from game import Game
@@ -29,13 +28,7 @@ class Story01(Game):
 
     def read_data(self):
         """必要データの読み来み."""
-        # 背景画像
-        path = os.path.join(Op.data_dir, Op.bkg_story01)
-        if os.path.exists(path):
-            pyxel.image(Op.bkg_story01_index).load(0, 0, path)
-        else:
-            print(f"No exists file {path}")
-            exit()
+        self.bkg_story01_index = self.read_img_data(Op.bkg_story01)
 
     def update(self):
         """ゲームの状態を更新する."""
@@ -48,7 +41,7 @@ class Story01(Game):
         pyxel.blt(描画位置x, 描画位置y, 画像ID,
                   描画元画像x, 描画元画像y, 描画幅, 描画高さ, 色)
         """
-        pyxel.blt(0, 0, Op.bkg_story01_index, 0, 0,
+        pyxel.blt(0, 0, self.bkg_story01_index, 0, 0,
                   pyxel.width, pyxel.height)  # 背景
         self.writer.draw(pyxel.width/3, 50, "ストーリー０１", 20, 1)  # 文字
 
